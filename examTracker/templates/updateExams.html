@@ -1,0 +1,113 @@
+{% extends 'dashboard_layout.html' %}
+{% load static %}
+{% block extrahead %} 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+{% endblock extrahead %}
+
+{% block body %} 
+<body>
+<div class="mt-5 pt-4">
+    {% if messages %}
+     {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} 
+    {% endif %}
+  </div>
+<div class="card p-4 shadow" style="max-width: 550px;margin-left: 18%; margin-right: 18%;">
+    <h5 class="card-header text-center ">Add Exam</h5>
+    <div class="form-group">
+    <div class="col-sm-13">
+         <form id="examForm" method="POST"
+         data-cour-url="{% url 'ajax_load_courses' %}"
+         data-std-url="{% url 'ajax_load_students' %}"
+         data-rm-url="{% url 'ajax_load_rooms' %}"
+         >
+               {% csrf_token %}
+                {{form.as_p}}
+              <input style="max-width:300%;" type="submit" class="btn btn-success" value="Register"/>
+        </form>
+        </div>
+    </div>
+    </div>
+   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var url1 = $("#examForm").attr("data-cour-url"); // get the url of the load_cities view
+            // var countryId = $(this).val();  // get the selected country ID from the HTML input
+            
+            $.ajax({ // initialize an AJAX request
+                url: url1, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                data: {
+                    // add the country id to the GET parameters
+                },
+                success: function (data) { // data is the return of the load_cities view function
+                    //console.log(data)
+                    $("#id_course").html(data); // replace the contents of the city input with the data that came from the server
+                }
+            });
+
+            $("#id_course").change(function () {
+                var url2 = $("#examForm").attr("data-std-url"); // get the url of the load_districts view
+                var coursId = $(this).val(); // get the selected province ID from the HTML input
+
+                $.ajax({ // initialize an AJAX request
+                    url: url2,
+                    data: {
+                        'course': coursId // add the country id to the GET parameters
+                    },
+                   
+                    success: function (data) { // data is the return of the load_cities view function
+                        console.log(data)
+                        $("#id_students").html(data); // replace the contents of the city input with the data that came from the server
+                    }
+                    
+                });
+                
+            });
+
+            var url3 = $("#examForm").attr("data-rm-url");
+            $.ajax({ // initialize an AJAX request
+                url: url3, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                data: {
+                    // add the country id to the GET parameters
+                },
+                success: function (data) { // data is the return of the load_cities view function
+                    //console.log(data)
+                    $("#id_rooms").html(data); // replace the contents of the city input with the data that came from the server
+                }
+            });
+
+            $("#id_rooms").change(function () {
+                var url4 = $("#examForm").attr("data-st-url"); // get the url of the load_districts view
+                var st_Id = $(this).val(); // get the selected province ID from the HTML input
+
+                $.ajax({ // initialize an AJAX request
+                    url: url4,
+                    data: {
+                        'rooms': st_Id // add the country id to the GET parameters
+                    },
+                   
+                   // success: function (data) { // data is the return of the load_cities view function
+                      //  console.log(data)
+                      //  $("#id_seats").html(data); // replace the contents of the city input with the data that came from the server
+                   // }
+                    
+                });
+                
+            });
+            
+        });
+    </script>
+   
+
+</body>
+{% endblock body %}

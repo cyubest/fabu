@@ -1,0 +1,40 @@
+{% extends 'dashboard_layout.html' %}
+{% load static %}
+{% block extrahead %} 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+{% endblock extrahead %}
+
+{% block body %} 
+<body>
+<div class="mt-5 pt-4">
+    {% if messages %}
+     {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} 
+    {% endif %}
+  </div>
+<div class="card p-4 shadow" style="max-width: 550px;margin-left: 18%; margin-right: 18%;">
+    <h5 class="card-header text-center ">Update Room Info</h5>
+    <div class="form-group">
+    <div class="col-sm-13">
+         <form  method="POST">
+               {% csrf_token %}
+                {{form.as_p}}
+              <input style="max-width:300%;" type="submit" class="btn btn-success" value="Update"/>
+        </form>
+        </div>
+    </div>
+    </div>
+   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+</body>
+{% endblock body %}

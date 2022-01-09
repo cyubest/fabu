@@ -1,0 +1,4 @@
+<option value="" selected disabled>Select room</option>
+{% for ro in rooms %}
+<option value="{{ ro.roomName }}">{{ ro.roomName }}</option>
+{% endfor %}

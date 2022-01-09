@@ -1,0 +1,4 @@
+<option value="" selected disabled>select seats</option> 
+{% for st in seats %}
+<option value="{{ st.id }}">{{ st.name }}</option>
+{% endfor %}

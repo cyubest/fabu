@@ -1,0 +1,40 @@
+#header {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #003366;
+    color: #fff;
+    overflow: hidden;
+}
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #fff;
+    font-family: Arial;
+}
+
+div.breadcrumbs {
+    background: #4f5863;
+    padding: 10px 40px;
+    border: none;
+    color: #fff;
+    text-align: left;
+}
+
+.login .submit-row {
+    padding: 0px !important;
+   
+}
+
+
+
+.module h2, .module caption, .inline-group h2 {
+    margin: 0;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: left;
+    background: #003366;
+    color: var(--header-link-color);
+}

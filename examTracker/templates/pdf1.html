@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rchwrs Report</title>
+</head>
+<body>
+
+  <img src="static/img/images.jpg" height='200px'>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+           <tr>
+             <th scope="col">Names</th>
+             <th scope="col">ID_No</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Ages</th>
+               <th scope="col">DateOfBirth</th>
+                <th scope="col">Category</th>
+                 <th scope="col">Insurance</th>
+                   <th scope="col">Phone</th>
+               
+             <th scope="col">Village</th>
+            <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for p in patients %}
+                 <tr>
+                 <td>{{p.names}}</td>
+                 <td>{{p.identificatioNo}}</td>
+                 <td>{{p.gender}}</td>
+                 <td>{{p.ages}}</td>
+                 <td>{{p.dateOfBirth}}</td>
+                 <td>{{p.categories__category_name}}</td>
+                 <td>{{p.insurance}}</td>
+                 <td>{{p.phone}}</td> 
+                 <td>{{p.village}}</td>
+                 <td>{{p.date}}</td>
+                 </tr>
+                 {% endfor %}  
+  </tbody>
+</table>
+</body>
+</html>

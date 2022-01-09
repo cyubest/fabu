@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>Report</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #2B3250;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color:#2B3250;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #2B3250;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 1rem;
+            min-width: 400px;
+            width: -webkit-fill-available;
+        }
+
+        th,
+        td {
+            padding: 4px 18px;
+        }
+
+        tbody tr {
+            border-bottom: #aaa;
+            border-style:solid;
+            /* border-width: 1px 0px 2px 1px; */
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        thead tr {
+            background-color: #2B3250;
+            color: white;
+            text-align: left;
+        }
+
+        img {
+            zoom: 80%;
+        }
+    </style>
+</head>
+
+<body>
+<img src="E:\Cyubi_Course_Materials\python\Log_NoPic\auca_logo.jpg" height="190px" width="320px" alt="logo" style="margin-bottom: 30px;">
+<h1 style="text-transform: uppercase; text-align: center;"> Report for Exam</h1>
+    <div>
+        <div class='details'>
+            Reporter: {{reporter}} {{reporterL}} <br /> Date: {{today}} <br/>
+            Number of data: {{number_of_data}}
+            <hr class='hrItem' />
+        </div>
+    </div>
+
+    <table class="content-table">
+        <caption></caption>
+        <thead>
+            <tr>
+            <th scope="col">Student Id</th>
+            <th scope="col">Course</th>
+            <th scope="col">Rooms</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Program</th>
+            <th scope="col">Date Of Exam</th>
+            <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in filtered_exams %}
+            <tr>
+                <td >{{exam.students}}</td>
+                <td >{{exam.course}}</td>
+                <td >{{exam.rooms}}</td>
+                <td >{{exam.seats}}</td>
+                <td >{{exam.program}}</td>
+                <td style="width: 90px;">{{exam.date}}</td>
+                <!-- <td style>{% for p in patient.categories.all %}
+                 {{p}}
+                 {% endfor %}</td> -->
+                <td >{{exam.time}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p style="float: right; margin-top: 30px;">
+       Report generated on: {{today}}
+    </p>
+
+</body>
+
+</html>

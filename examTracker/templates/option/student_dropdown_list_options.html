@@ -1,0 +1,5 @@
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+{% for std in students %}
+<input class="form-control" value="{{ std.std_Id }}" >{{std.firstName}} {{std.lastName}}<br/>
+{% endfor %}
+</div>

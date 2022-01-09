@@ -1,0 +1,4 @@
+<option value="">Select Course</option>
+{% for cour in courses %}
+<option value="{{ cour.course_Id }}">{{ cour.courseName }}</option>
+{% endfor %}

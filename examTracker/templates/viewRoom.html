@@ -1,0 +1,116 @@
+{% extends 'dashboard_layout.html' %}
+{% load static %}
+{% block extrahead %} 
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock extrahead %}
+
+{% block body %} 
+<body>
+        <a class="btn btn-primary show-form" href="{% url 'add_room' %}" style="color: white;background-color: blue;">
+           <span class="glyphicon glyphicon-plus"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+           </span>
+              New Room
+        </a>
+
+        <div class="row" style="padding-top: 2%;">
+            <div class="col">
+                <div class="card card-body">
+                    <form method="GET" >
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ myFilter.form.roomName.label_tag}}
+                            {% render_field myFilter.form.roomName class="form-control" %}
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">search:</p>
+                            <button class="btn btn-primary  form-control" type="submit" style="color: white;background-color: blue;">Search</button>
+                        </div>
+                    </div>
+                    
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    <br>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Room Name</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Seats</th>
+                <th scope="col">Room</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for room in roomos %}
+                    <tr>
+                    <td>{{room.roomName}}</td>
+                    <td>{{room.floor}}</td>
+                    <td>{{room.seats}}</td>
+                    <td>
+                      <a class="btn btn-sm btn-info" href="{% url 'update_room' room.id %}" style="color: white;background-color: blue;">
+                        <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </span>
+                            Update
+                       </a>
+                    </td>
+                    </tr>
+                    {% endfor %}  
+      </tbody>
+      </table>
+
+        {% if examos.has_other_pages %}
+            <ul class="pagination">
+        {% if examos.has_previous %}
+            <li><a href="?page={{ examos.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in examos.paginator.page_range %}
+            {% if examos.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span> 
+        .     </span></li>
+        {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if examos.has_next %}
+        <li><a href="?page={{ examos.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure do you want to delete this patient
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" >Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+                 
+                </div>
+    </body>
+  {% endblock body %}

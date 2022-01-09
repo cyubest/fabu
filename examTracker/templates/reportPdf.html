@@ -1,0 +1,58 @@
+{% extends 'dashboard_layout.html' %} 
+{% load widget_tweaks %}
+{% block extrahead %}
+{% endblock extrahead %}
+{% block content %}
+ 
+ <div class="row">
+          <div class="col">
+              <div class="card card-body">
+                  <form method="GET" >
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ myFilter.form.students.label_tag}}
+                            {% render_field my_filter.form.students class="form-control" %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ myFilter.form.course.label_tag}}
+                            {% render_field my_filter.form.course class="form-control" %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ myFilter.form.rooms.label_tag}}
+                            {% render_field my_filter.form.rooms class="form-control" %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ my_filter.form.seats.label_tag}}
+                            {% render_field my_filter.form.seats class="form-control" %}
+                        </div>
+                        
+                        <div class="col-md-4">
+                            {{ my_filter.form.time.label_tag}}
+                            {% render_field my_filter.form.time class="form-control" %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ myFilter.form.start_date.label_tag}}
+                            {% render_field myFilter.form.start_date class="form-control" type='date' %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ myFilter.form.end_date.label_tag}}
+                            {% render_field myFilter.form.end_date class="form-control" type='date' %}
+                        </div>
+                       
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">search:</p>
+                            <button class="btn btn-primary  form-control" type="submit">Search</button>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+       <br>
+
+
+
+<a href="{% url 'test-view' %}" class="btn btn-secondary form-control">Export pdf</a>
+
+
+ {% endblock content %}

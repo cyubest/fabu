@@ -1,0 +1,148 @@
+{% extends 'dashboard_layout.html' %}
+{% load widget_tweaks %}
+{% block extra_head %}
+<style>
+    .btn-primarys{
+        color: rgb(28, 62, 218);
+        background-color: #2a70dd;
+        border-color: rgb(28, 62, 218);
+    }
+    .btn-primarys:hover {
+        color: rgb(82, 38, 204);
+        background-color: #FAB812;
+        border-color: #FAB812;
+    }
+</style>
+ {% endblock %}
+{% block body %}
+<h3>REPORT</h3>
+<div class="card px-1 pb-1 p-4 shadow shadow-default col-xs-8 col-sm-8 col-md-6 col-lg-6 mb-3">
+    <h5>Select the pattern of report you want</h5>
+    <form action="" method="POST" id="myForm">
+        {% csrf_token %}
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">Date range :</label>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                {% render_field my_filter.form.date_range class="form-control"  %}
+            </div>
+        </div>
+        
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">Student:</label>
+            </div>
+            <div class="col-md-12">
+                {{ myFilter.form.students.label_tag}}
+                {% render_field my_filter.form.students class="form-control" %}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">Course:</label>
+            </div>
+            <div class="col-md-12">
+                {{ myFilter.form.course.label_tag}}
+                {% render_field my_filter.form.course class="form-control" %}
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">Room:</label>
+            </div>
+            <div class="col-md-12">
+                {{ myFilter.form.rooms.label_tag}}
+                {% render_field my_filter.form.rooms class="form-control" %}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">Seats:</label>
+            </div>
+            <div class="col-md-12">
+                {{ my_filter.form.seats.label_tag}}
+                {% render_field my_filter.form.seats class="form-control" %}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <label for="id_date_range" class="text-black-50">time:</label>
+            </div>
+            <div class="col-md-12">
+                {{ my_filter.form.time.label_tag}}
+                {% render_field my_filter.form.time class="form-control" %}
+            </div>
+        </div>
+
+            <!-- <div class="row mt-2">
+                <div class="col-md-12">
+                    {{ my_filter.form.categories.label_tag}}
+                    {% render_field my_filter.form.categories class="form-control" %}
+                </div>
+            </div> -->
+
+        
+        <div id="range">
+            <div class="row mt-2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label for="id_start_date" class="text-black-50">Start date :</label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    {% render_field my_filter.form.start_date class="form-control" type="date" placeholder="yyyy-mm-dd" %}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label for="id_end_date" class="text-black-50">End date :</label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    {% render_field my_filter.form.end_date class="form-control" type="date" placeholder="yyyy-mm-dd" %}
+                </div>
+            </div>
+        </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primarys mr-1 mb-1" style="background-color: #2a70dd;">Generate Report</button>
+                    <button type="reset" class="btn btn-outline-primary mr-1 mb-1">Reset</button>
+
+                </div>
+            </div>
+    </form>
+</div>
+
+{% block javascript %}
+
+    <script>
+    $(document).ready(function () {
+        $("#range").addClass("d-none");
+        var sel = document.getElementById('id_date_range');
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode('custom'));
+        opt.value = 'custom';
+        sel.appendChild(opt);
+
+        $("#id_date_range").change(function () {
+            var e = document.getElementById("id_date_range")
+            var selectedValue = e.options[e.selectedIndex].value;
+
+if (selectedValue == "custom") {
+                event.preventDefault()
+                $("#range").removeClass("d-none");
+            } else {
+                event.preventDefault()
+                document.getElementById("id_start_date").value = "";
+                document.getElementById("id_end_date").value = "";
+                $("#range").addClass("d-none");
+            }
+        })
+    });
+
+</script>
+{% endblock javascript %}
+
+{% endblock %}

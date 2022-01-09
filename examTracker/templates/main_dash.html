@@ -1,0 +1,148 @@
+{% extends 'dashboard_layout.html' %}
+{% load static %}
+{% block extrahead %} 
+<script type="text/javascript">
+  var januaryExam= {{ januaryExam }}
+  var februaryExam = {{ februaryExam }}
+  var marchExam = {{marchExam  }}
+  var aprilExam = {{ aprilExam }}
+  var mayExam = {{ mayExam  }}
+  var juneExam = {{ juneExam}}
+  var julyExam = {{ julyExam }}
+  var augustExam = {{ augustExam}}
+  var septemberExam = {{ septemberExam }}
+  var octoberExam = {{ octoberExam }}
+  var novemberExam = {{ novemberExam }}
+  var decemberExam = {{ decemberExam  }}
+
+   
+    
+
+$(document).ready(function () {
+  
+var ctx = document.getElementById('myChartLine').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],
+    datasets: [{
+      label: 'Exam',
+      data: [januaryExam, februaryExam,  marchExam, aprilExam,mayExam,juneExam,julyExam,augustExam,septemberExam,octoberExam, novemberExam, decemberExam ],
+      backgroundColor: [
+        'rgba(43, 50, 80)',
+        'rgba(216, 59, 116)',
+        'rgba(90, 73, 110)',
+        'rgba(212, 156, 57)',
+        'rgba(212, 156, 57)',
+        'rgba(212, 156, 57)',
+        'rgba(212, 156, 57)',
+        'rgba(212, 156, 57)',
+        'rgba(216, 59, 116)',
+        'rgba(212, 156, 57)',
+        'rgba(212, 156, 57)',
+        '#000',
+        
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        gridLines: {
+          display: true
+        },
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        },
+      }],
+    },
+    title: {
+      display: true,
+      text: 'Number of student who did final exam'
+    }
+  }
+});
+
+
+
+});
+</script>
+
+
+{% endblock extrahead %}
+
+{% block body %} 
+<div class="row">
+   
+    <div class="col-xl-4 col-md-3">
+      <div class="card bg-white text-black shadow mb-4">
+        <div class="card-body">Courses</div>
+        <div
+          class="card-footer d-flex align-items-center justify-content-between"
+        >
+          <div
+            class="small text-black text-center"
+            style="width: 1110px; font-size: 2rem"
+          >
+            {{courses}}
+          </div>
+          <div class="small text-white"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-3">
+      <div
+        class="card bg-white text-black shadow mb-4"
+        style="background-color: #6c996c"
+      >
+        <div class="card-body">Rooms</div>
+        <div
+          class="card-footer d-flex align-items-center justify-content-between"
+        >
+          <div
+            class="small text-black text-center"
+            style="width: 1110px; font-size: 2rem"
+          >
+            {{rooms}}
+          </div>
+          <div class="small text-white"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-3">
+      <div class="card bg-white text-black shadow mb-4">
+        <div class="card-body">Exams</div>
+        <div
+          class="card-footer d-flex align-items-center justify-content-between"
+        >
+          <div
+            class="small text-black text-center"
+            style="width: 1110px; font-size: 2rem"
+          >
+            {{exams}}
+          </div>
+          <div class="small text-white" style="max-width: 20px"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xl-9">
+      <div class="card mb-4" style="width: 800;">
+        <div class="card-header shadow">
+          <i class="fas fa-chart-bar mr-1"></i>
+          Exams in this current year
+        </div>
+        <div class="card-body shadow">
+          <canvas id="myChartLine" width="100%" height="40"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock body %}
